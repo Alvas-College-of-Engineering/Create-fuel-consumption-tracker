@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehicle Details</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Vehicle History: <span th:text="${vehicleName}">Name</span></h1>
+        
+        <div class="summary-card">
+            <p><strong>Status:</strong> <span class="status-tag">Active</span></p>
+            <p><strong>Average Efficiency:</strong> <span style="font-size: 1.5rem; font-weight: 800;" th:text="${#numbers.formatDecimal(avgEfficiency, 1, 2)}">0.00</span> <span style="font-size: 0.9rem; opacity: 0.8;">km/L</span></p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <a th:href="@{/}" class="btn">Back to Dashboard</a>
+            <a th:href="@{/add-record}" class="btn">Add Record for this Vehicle</a>
+        </div>
+
+        <h2>Fuel Log</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Fuel (L)</th>
+                    <th>Distance (km)</th>
+                    <th>Efficiency (km/L)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="record : ${records}">
+                    <td th:text="${record.date}">Date</td>
+                    <td th:text="${record.fuelAdded}">0.0</td>
+                    <td th:text="${record.distanceTraveled}">0.0</td>
+                    <td th:text="${#numbers.formatDecimal(record.calculateEfficiency(), 1, 2)}">0.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fuel Tracker Dashboard</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fuel Consumption Tracker</h1>
+        
+        <div class="summary-card" th:if="${mostEfficient != null}">
+            <h2>Most Efficient Vehicle</h2>
+            <p><strong>Name:</strong> <span th:text="${mostEfficient.vehicleName}">Name</span></p>
+            <p><strong>Type:</strong> <span class="status-tag" th:text="${mostEfficient.vehicleType}">Type</span></p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <a th:href="@{/add-vehicle}" class="btn">Add New Vehicle</a>
+            <a th:href="@{/add-record}" class="btn">Add Fuel Record</a>
+        </div>
+
+        <h2>Vehicle Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vehicle Name</th>
+                    <th>ID</th>
+                    <th>Total Records</th>
+                    <th>Avg Efficiency (km/L)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="summary : ${summaries}">
+                    <td th:text="${summary.name}">Name</td>
+                    <td th:text="${summary.id}">ID</td>
+                    <td th:text="${summary.totalRecords}">0</td>
+                    <td th:text="${#numbers.formatDecimal(summary.avgEfficiency, 1, 2)}">0.00</td>
+                    <td><a th:href="@{'/vehicle/' + ${summary.id}}" class="btn btn-secondary">View Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
