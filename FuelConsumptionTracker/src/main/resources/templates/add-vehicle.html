@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Vehicle</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Vehicle</h1>
+        <form th:action="@{/add-vehicle}" method="post">
+            <div>
+                <label>Vehicle ID (e.g., V001):</label>
+                <input type="text" name="id" required placeholder="V001">
+            </div>
+            <div>
+                <label>Vehicle Name:</label>
+                <input type="text" name="name" required placeholder="Toyota Camry">
+            </div>
+            <div>
+                <label>Vehicle Type:</label>
+                <select name="type">
+                    <option value="Car">Car</option>
+                    <option value="Bike">Bike</option>
+                    <option value="Truck">Truck</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Register Vehicle</button>
+            <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
